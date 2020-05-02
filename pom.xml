@@ -25,6 +25,8 @@
         <module>gateway</module>
         <!--资源服务-->
         <module>client1</module>
+        <!--资源服务-第三支柱-->
+        <module>third-pillar-server</module>
     </modules>
 
     <properties>
@@ -35,7 +37,6 @@
         <mysql.version>5.1.46</mysql.version>
         <druid.version>1.1.9</druid.version>
         <log4j.version>1.2.17</log4j.version>
-        <fastjson.version>1.2.7</fastjson.version>
         <mybatis.version>RELEASE</mybatis.version>
         <pagehelper.version>RELEASE</pagehelper.version>
         <tk.mybatis.version>RELEASE</tk.mybatis.version>

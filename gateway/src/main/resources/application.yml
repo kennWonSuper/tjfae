@@ -19,6 +19,10 @@ zuul:
       path: /client1/**
       serviceId: client1
       sensitiveHeaders: "*"
+    pillar:
+      path: /pillar/**
+      serviceId: pillar
+      sensitiveHeaders: "*"
     auth:
       path: /uaa/**
       serviceId: oauth-center

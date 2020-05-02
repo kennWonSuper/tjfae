@@ -4,6 +4,10 @@ server:
 spring:
   application:
     name: oauth-center
+  # èµ„æºä¿¡æ¯
+  messages:
+    # èµ„æºæ–‡ä»¶è·¯å¾„
+    basename: i18n/messages
   redis:
     database: 0
     host: localhost
@@ -20,20 +24,20 @@ spring:
     username: root
     password: root
   druid:
-    initialSize: 5 #³õÊ¼»¯Á¬½Ó´óĞ¡
-    minIdle: 5     #×îĞ¡Á¬½Ó³ØÊıÁ¿
-    maxActive: 20  #×î´óÁ¬½Ó³ØÊıÁ¿
-    maxWait: 60000 #»ñÈ¡Á¬½ÓÊ±×î´óµÈ´ıÊ±¼ä£¬µ¥Î»ºÁÃë
-    timeBetweenEvictionRunsMillis: 60000 #ÅäÖÃ¼ä¸ô¶à¾Ã²Å½øĞĞÒ»´Î¼ì²â£¬¼ì²âĞèÒª¹Ø±ÕµÄ¿ÕÏĞÁ¬½Ó£¬µ¥Î»ÊÇºÁÃë
-    minEvictableIdleTimeMillis: 300000   #ÅäÖÃÒ»¸öÁ¬½ÓÔÚ³ØÖĞ×îĞ¡Éú´æµÄÊ±¼ä£¬µ¥Î»ÊÇºÁÃë
-    validationQuery: SELECT 1 from DUAL  #²âÊÔÁ¬½Ó
-    testWhileIdle: true                  #ÉêÇëÁ¬½ÓµÄÊ±ºò¼ì²â£¬½¨ÒéÅäÖÃÎªtrue£¬²»Ó°ÏìĞÔÄÜ£¬²¢ÇÒ±£Ö¤°²È«ĞÔ
-    testOnBorrow: false                  #»ñÈ¡Á¬½ÓÊ±Ö´ĞĞ¼ì²â£¬½¨Òé¹Ø±Õ£¬Ó°ÏìĞÔÄÜ
-    testOnReturn: false                  #¹é»¹Á¬½ÓÊ±Ö´ĞĞ¼ì²â£¬½¨Òé¹Ø±Õ£¬Ó°ÏìĞÔÄÜ
-    poolPreparedStatements: false        #ÊÇ·ñ¿ªÆôPSCache£¬PSCache¶ÔÖ§³ÖÓÎ±êµÄÊı¾İ¿âĞÔÄÜÌáÉı¾Ş´ó£¬oracle½¨Òé¿ªÆô£¬mysqlÏÂ½¨Òé¹Ø±Õ
-    maxPoolPreparedStatementPerConnectionSize: 20 #¿ªÆôpoolPreparedStatementsºóÉúĞ§
-    filters: stat,wall,log4j #ÅäÖÃÀ©Õ¹²å¼ş£¬³£ÓÃµÄ²å¼şÓĞ=>stat:¼à¿ØÍ³¼Æ  log4j:ÈÕÖ¾  wall:·ÀÓùsql×¢Èë
-    connectionProperties: 'druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000' #Í¨¹ıconnectPropertiesÊôĞÔÀ´´ò¿ªmergeSql¹¦ÄÜ;ÂıSQL¼ÇÂ¼
+    initialSize: 5 #åˆå§‹åŒ–è¿æ¥å¤§å°
+    minIdle: 5     #æœ€å°è¿æ¥æ± æ•°é‡
+    maxActive: 20  #æœ€å¤§è¿æ¥æ± æ•°é‡
+    maxWait: 60000 #è·å–è¿æ¥æ—¶æœ€å¤§ç­‰å¾…æ—¶é—´ï¼Œå•ä½æ¯«ç§’
+    timeBetweenEvictionRunsMillis: 60000 #é…ç½®é—´éš”å¤šä¹…æ‰è¿›è¡Œä¸€æ¬¡æ£€æµ‹ï¼Œæ£€æµ‹éœ€è¦å…³é—­çš„ç©ºé—²è¿æ¥ï¼Œå•ä½æ˜¯æ¯«ç§’
+    minEvictableIdleTimeMillis: 300000   #é…ç½®ä¸€ä¸ªè¿æ¥åœ¨æ± ä¸­æœ€å°ç”Ÿå­˜çš„æ—¶é—´ï¼Œå•ä½æ˜¯æ¯«ç§’
+    validationQuery: SELECT 1 from DUAL  #æµ‹è¯•è¿æ¥
+    testWhileIdle: true                  #ç”³è¯·è¿æ¥çš„æ—¶å€™æ£€æµ‹ï¼Œå»ºè®®é…ç½®ä¸ºtrueï¼Œä¸å½±å“æ€§èƒ½ï¼Œå¹¶ä¸”ä¿è¯å®‰å…¨æ€§
+    testOnBorrow: false                  #è·å–è¿æ¥æ—¶æ‰§è¡Œæ£€æµ‹ï¼Œå»ºè®®å…³é—­ï¼Œå½±å“æ€§èƒ½
+    testOnReturn: false                  #å½’è¿˜è¿æ¥æ—¶æ‰§è¡Œæ£€æµ‹ï¼Œå»ºè®®å…³é—­ï¼Œå½±å“æ€§èƒ½
+    poolPreparedStatements: false        #æ˜¯å¦å¼€å¯PSCacheï¼ŒPSCacheå¯¹æ”¯æŒæ¸¸æ ‡çš„æ•°æ®åº“æ€§èƒ½æå‡å·¨å¤§ï¼Œoracleå»ºè®®å¼€å¯ï¼Œmysqlä¸‹å»ºè®®å…³é—­
+    maxPoolPreparedStatementPerConnectionSize: 20 #å¼€å¯poolPreparedStatementsåç”Ÿæ•ˆ
+    filters: stat,wall,log4j #é…ç½®æ‰©å±•æ’ä»¶ï¼Œå¸¸ç”¨çš„æ’ä»¶æœ‰=>stat:ç›‘æ§ç»Ÿè®¡  log4j:æ—¥å¿—  wall:é˜²å¾¡sqlæ³¨å…¥
+    connectionProperties: 'druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000' #é€šè¿‡connectPropertieså±æ€§æ¥æ‰“å¼€mergeSqlåŠŸèƒ½;æ…¢SQLè®°å½•
 
 
 eureka:
@@ -44,5 +48,27 @@ eureka:
     service-url:
       defaultZone: http://localhost:8090/eureka/
 
+# tokené…ç½®
+token:
+  # ä»¤ç‰Œè‡ªå®šä¹‰æ ‡è¯†
+  header: Authorization
+  # ä»¤ç‰Œç§˜é’¥
+  secret: abcdefghijklmnopqrstuvwxyz
+  # ä»¤ç‰Œæœ‰æ•ˆæœŸï¼ˆé»˜è®¤30åˆ†é’Ÿï¼‰
+  expireTime: 30
 
+# MyBatisé…ç½®
+mybatis:
+  # æœç´¢æŒ‡å®šåŒ…åˆ«å
+  typeAliasesPackage: com.tjfae.oauthcenter.system.domain
+  # é…ç½®mapperçš„æ‰«æï¼Œæ‰¾åˆ°æ‰€æœ‰çš„mapper.xmlæ˜ å°„æ–‡ä»¶
+  mapperLocations: classpath*:mybatis/**/*Mapper.xml
+  # åŠ è½½å…¨å±€çš„é…ç½®æ–‡ä»¶
+  configLocation: classpath:mybatis/mybatis-config.xml
 
+# PageHelperåˆ†é¡µæ’ä»¶
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql

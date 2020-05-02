@@ -60,19 +60,6 @@ public class AuthorizationServerConfig  extends AuthorizationServerConfigurerAda
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
          clients.withClientDetails(clientDetails());    //  表 oauth_client_details
-//        clients.inMemory()
-//                .withClient("android")
-//                .scopes("read")
-//                .secret("android")
-//                .authorizedGrantTypes("password", "authorization_code", "refresh_token")
-//                .and()
-//                .withClient("webapp")
-//                .scopes("read")
-//                .authorizedGrantTypes("implicit")
-//                .and()
-//                .withClient("browser")
-//                .authorizedGrantTypes("refresh_token", "password")
-//                .scopes("read");
     }
     @Bean
     public ClientDetailsService clientDetails() {

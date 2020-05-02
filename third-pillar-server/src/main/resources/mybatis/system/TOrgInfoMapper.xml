@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.system.mapper.TOrgInfoMapper">
+
+    <resultMap type="TOrgInfo" id="TOrgInfoResult">
+        <result property="deptId"    column="dept_id"    />
+        <result property="parentId"    column="parent_id"    />
+        <result property="ancestors"    column="ancestors"    />
+        <result property="deptName"    column="dept_name"    />
+        <result property="deptType"    column="dept_type"    />
+        <result property="orderNum"    column="order_num"    />
+        <result property="leader"    column="leader"    />
+        <result property="phone"    column="phone"    />
+        <result property="email"    column="email"    />
+        <result property="status"    column="status"    />
+        <result property="socialCreditCode"    column="social_credit_code"    />
+        <result property="corporate"    column="corporate"    />
+        <result property="registerAddress"    column="register_address"    />
+        <result property="registerAmount"    column="register_amount"    />
+        <result property="clearingDeptName"    column="clearing_dept_name"    />
+        <result property="bankName"    column="bank_name"    />
+        <result property="accountName"    column="account_name"    />
+        <result property="accountNo"    column="account_no"    />
+        <result property="bake"    column="bake"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectTOrgInfoVo">
+        select dept_id, parent_id, ancestors, dept_name, dept_type, order_num, leader, phone, email, status, social_credit_code, corporate, register_address, register_amount, clearing_dept_name, bank_name, account_name, account_no, bake, del_flag, create_by, update_by, update_time, create_time from sys_dept
+    </sql>
+
+    <select id="selectTOrgInfoList" parameterType="TOrgInfo" resultMap="TOrgInfoResult">
+        <include refid="selectTOrgInfoVo"/>
+        <where>
+            <if test="parentId != null "> and parent_id = #{parentId}</if>
+            <if test="ancestors != null  and ancestors != ''"> and ancestors = #{ancestors}</if>
+            <if test="deptName != null  and deptName != ''"> and dept_name like concat('%', #{deptName}, '%')</if>
+            <if test="deptType != null  and deptType != ''"> and dept_type = #{deptType}</if>
+            <if test="orderNum != null "> and order_num = #{orderNum}</if>
+            <if test="leader != null  and leader != ''"> and leader = #{leader}</if>
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="email != null  and email != ''"> and email = #{email}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="socialCreditCode != null  and socialCreditCode != ''"> and social_credit_code = #{socialCreditCode}</if>
+            <if test="corporate != null  and corporate != ''"> and corporate = #{corporate}</if>
+            <if test="registerAddress != null  and registerAddress != ''"> and register_address = #{registerAddress}</if>
+            <if test="registerAmount != null "> and register_amount = #{registerAmount}</if>
+            <if test="clearingDeptName != null  and clearingDeptName != ''"> and clearing_dept_name like concat('%', #{clearingDeptName}, '%')</if>
+            <if test="bankName != null  and bankName != ''"> and bank_name like concat('%', #{bankName}, '%')</if>
+            <if test="accountName != null  and accountName != ''"> and account_name like concat('%', #{accountName}, '%')</if>
+            <if test="accountNo != null  and accountNo != ''"> and account_no = #{accountNo}</if>
+            <if test="bake != null  and bake != ''"> and bake = #{bake}</if>
+            <if test="checkStatus != null  and checkStatus != ''"> and (check_status is null or check_status != #{checkStatus})</if>
+            <if test="1 == 1"> and parent_id != 0</if>
+        </where>
+    </select>
+
+    <select id="selectTOrgInfoById" parameterType="Long" resultMap="TOrgInfoResult">
+        <include refid="selectTOrgInfoVo"/>
+        where dept_id = #{deptId}
+    </select>
+
+    <insert id="insertTOrgInfo" parameterType="TOrgInfo" useGeneratedKeys="true" keyProperty="deptId">
+        insert into sys_dept
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="parentId != null ">parent_id,</if>
+            <if test="ancestors != null  and ancestors != ''">ancestors,</if>
+            <if test="deptName != null  and deptName != ''">dept_name,</if>
+            <if test="deptType != null  and deptType != ''">dept_type,</if>
+            <if test="orderNum != null ">order_num,</if>
+            <if test="leader != null  and leader != ''">leader,</if>
+            <if test="phone != null  and phone != ''">phone,</if>
+            <if test="email != null  and email != ''">email,</if>
+            <if test="status != null  and status != ''">status,</if>
+            <if test="socialCreditCode != null  and socialCreditCode != ''">social_credit_code,</if>
+            <if test="corporate != null  and corporate != ''">corporate,</if>
+            <if test="registerAddress != null  and registerAddress != ''">register_address,</if>
+            <if test="registerAmount != null ">register_amount,</if>
+            <if test="clearingDeptName != null  and clearingDeptName != ''">clearing_dept_name,</if>
+            <if test="bankName != null  and bankName != ''">bank_name,</if>
+            <if test="accountName != null  and accountName != ''">account_name,</if>
+            <if test="accountNo != null  and accountNo != ''">account_no,</if>
+            <if test="bake != null  and bake != ''">bake,</if>
+            <if test="delFlag != null  and delFlag != ''">del_flag,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="updateBy != null  and updateBy != ''">update_by,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="createTime != null ">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="parentId != null ">#{parentId},</if>
+            <if test="ancestors != null  and ancestors != ''">#{ancestors},</if>
+            <if test="deptName != null  and deptName != ''">#{deptName},</if>
+            <if test="deptType != null  and deptType != ''">#{deptType},</if>
+            <if test="orderNum != null ">#{orderNum},</if>
+            <if test="leader != null  and leader != ''">#{leader},</if>
+            <if test="phone != null  and phone != ''">#{phone},</if>
+            <if test="email != null  and email != ''">#{email},</if>
+            <if test="status != null  and status != ''">#{status},</if>
+            <if test="socialCreditCode != null  and socialCreditCode != ''">#{socialCreditCode},</if>
+            <if test="corporate != null  and corporate != ''">#{corporate},</if>
+            <if test="registerAddress != null  and registerAddress != ''">#{registerAddress},</if>
+            <if test="registerAmount != null ">#{registerAmount},</if>
+            <if test="clearingDeptName != null  and clearingDeptName != ''">#{clearingDeptName},</if>
+            <if test="bankName != null  and bankName != ''">#{bankName},</if>
+            <if test="accountName != null  and accountName != ''">#{accountName},</if>
+            <if test="accountNo != null  and accountNo != ''">#{accountNo},</if>
+            <if test="bake != null  and bake != ''">#{bake},</if>
+            <if test="delFlag != null  and delFlag != ''">#{delFlag},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="createTime != null ">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTOrgInfo" parameterType="TOrgInfo">
+        update sys_dept
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="parentId != null ">parent_id = #{parentId},</if>
+            <if test="ancestors != null  and ancestors != ''">ancestors = #{ancestors},</if>
+            <if test="deptName != null  and deptName != ''">dept_name = #{deptName},</if>
+            <if test="deptType != null  and deptType != ''">dept_type = #{deptType},</if>
+            <if test="orderNum != null ">order_num = #{orderNum},</if>
+            <if test="leader != null  and leader != ''">leader = #{leader},</if>
+            <if test="phone != null  and phone != ''">phone = #{phone},</if>
+            <if test="email != null  and email != ''">email = #{email},</if>
+            <if test="status != null  and status != ''">status = #{status},</if>
+            <if test="socialCreditCode != null  and socialCreditCode != ''">social_credit_code = #{socialCreditCode},</if>
+            <if test="corporate != null  and corporate != ''">corporate = #{corporate},</if>
+            <if test="registerAddress != null  and registerAddress != ''">register_address = #{registerAddress},</if>
+            <if test="registerAmount != null ">register_amount = #{registerAmount},</if>
+            <if test="clearingDeptName != null  and clearingDeptName != ''">clearing_dept_name = #{clearingDeptName},</if>
+            <if test="bankName != null  and bankName != ''">bank_name = #{bankName},</if>
+            <if test="accountName != null  and accountName != ''">account_name = #{accountName},</if>
+            <if test="accountNo != null  and accountNo != ''">account_no = #{accountNo},</if>
+            <if test="bake != null  and bake != ''">bake = #{bake},</if>
+            <if test="delFlag != null  and delFlag != ''">del_flag = #{delFlag},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+        </trim>
+        where dept_id = #{deptId}
+    </update>
+    <update id="check">
+        update sys_dept set check_status = #{checkStatus} where dept_id = #{deptId}
+    </update>
+
+    <delete id="deleteTOrgInfoById" parameterType="Long">
+        delete from sys_dept where dept_id = #{deptId}
+    </delete>
+
+    <delete id="deleteTOrgInfoByIds" parameterType="String">
+        delete from sys_dept where dept_id in
+        <foreach item="deptId" collection="array" open="(" separator="," close=")">
+            #{deptId}
+        </foreach>
+    </delete>
+
+</mapper>

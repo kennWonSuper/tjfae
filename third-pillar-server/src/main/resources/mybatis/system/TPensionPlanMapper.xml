@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.system.mapper.TPensionPlanMapper">
+    
+    <resultMap type="TPensionPlan" id="TPensionPlanResult">
+        <result property="planId"    column="plan_id"    />
+        <result property="planName"    column="plan_name"    />
+        <result property="planNumber"    column="plan_number"    />
+        <result property="startTime"    column="start_time"    />
+        <result property="agentId"    column="agent_id"    />
+        <result property="clearId"    column="clear_id"    />
+        <result property="trusteeId"    column="trustee_id"    />
+        <result property="custodianId"    column="custodian_id"    />
+        <result property="feePeriod"    column="fee_period"    />
+        <result property="trusteeRate"    column="trustee_rate"    />
+        <result property="custodianRate"    column="custodian_rate"    />
+        <result property="bake"    column="bake"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectTPensionPlanVo">
+        select plan_id, plan_name, plan_number, start_time, agent_id, clear_id, trustee_id, custodian_id, fee_period, trustee_rate, custodian_rate, bake, del_flag, create_by, update_by, update_time, create_time from t_pension_plan
+    </sql>
+
+    <select id="selectTPensionPlanList" parameterType="TPensionPlan" resultMap="TPensionPlanResult">
+        <include refid="selectTPensionPlanVo"/>
+        <where>  
+            <if test="planName != null  and planName != ''"> and plan_name like concat('%', #{planName}, '%')</if>
+            <if test="planNumber != null  and planNumber != ''"> and plan_number = #{planNumber}</if>
+            <if test="startTime != null "> and start_time = #{startTime}</if>
+            <if test="agentId != null "> and agent_id = #{agentId}</if>
+            <if test="clearId != null "> and clear_id = #{clearId}</if>
+            <if test="trusteeId != null "> and trustee_id = #{trusteeId}</if>
+            <if test="custodianId != null "> and custodian_id = #{custodianId}</if>
+            <if test="feePeriod != null  and feePeriod != ''"> and fee_period = #{feePeriod}</if>
+            <if test="trusteeRate != null "> and trustee_rate = #{trusteeRate}</if>
+            <if test="custodianRate != null "> and custodian_rate = #{custodianRate}</if>
+            <if test="bake != null  and bake != ''"> and bake = #{bake}</if>
+        </where>
+    </select>
+    
+    <select id="selectTPensionPlanById" parameterType="Long" resultMap="TPensionPlanResult">
+        <include refid="selectTPensionPlanVo"/>
+        where plan_id = #{planId}
+    </select>
+        
+    <insert id="insertTPensionPlan" parameterType="TPensionPlan" useGeneratedKeys="true" keyProperty="planId">
+        insert into t_pension_plan
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="planName != null  and planName != ''">plan_name,</if>
+            <if test="planNumber != null  and planNumber != ''">plan_number,</if>
+            <if test="startTime != null ">start_time,</if>
+            <if test="agentId != null ">agent_id,</if>
+            <if test="clearId != null ">clear_id,</if>
+            <if test="trusteeId != null ">trustee_id,</if>
+            <if test="custodianId != null ">custodian_id,</if>
+            <if test="feePeriod != null  and feePeriod != ''">fee_period,</if>
+            <if test="trusteeRate != null ">trustee_rate,</if>
+            <if test="custodianRate != null ">custodian_rate,</if>
+            <if test="bake != null  and bake != ''">bake,</if>
+            <if test="delFlag != null  and delFlag != ''">del_flag,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="updateBy != null  and updateBy != ''">update_by,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="createTime != null ">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="planName != null  and planName != ''">#{planName},</if>
+            <if test="planNumber != null  and planNumber != ''">#{planNumber},</if>
+            <if test="startTime != null ">#{startTime},</if>
+            <if test="agentId != null ">#{agentId},</if>
+            <if test="clearId != null ">#{clearId},</if>
+            <if test="trusteeId != null ">#{trusteeId},</if>
+            <if test="custodianId != null ">#{custodianId},</if>
+            <if test="feePeriod != null  and feePeriod != ''">#{feePeriod},</if>
+            <if test="trusteeRate != null ">#{trusteeRate},</if>
+            <if test="custodianRate != null ">#{custodianRate},</if>
+            <if test="bake != null  and bake != ''">#{bake},</if>
+            <if test="delFlag != null  and delFlag != ''">#{delFlag},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="createTime != null ">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTPensionPlan" parameterType="TPensionPlan">
+        update t_pension_plan
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="planName != null  and planName != ''">plan_name = #{planName},</if>
+            <if test="planNumber != null  and planNumber != ''">plan_number = #{planNumber},</if>
+            <if test="startTime != null ">start_time = #{startTime},</if>
+            <if test="agentId != null ">agent_id = #{agentId},</if>
+            <if test="clearId != null ">clear_id = #{clearId},</if>
+            <if test="trusteeId != null ">trustee_id = #{trusteeId},</if>
+            <if test="custodianId != null ">custodian_id = #{custodianId},</if>
+            <if test="feePeriod != null  and feePeriod != ''">fee_period = #{feePeriod},</if>
+            <if test="trusteeRate != null ">trustee_rate = #{trusteeRate},</if>
+            <if test="custodianRate != null ">custodian_rate = #{custodianRate},</if>
+            <if test="bake != null  and bake != ''">bake = #{bake},</if>
+            <if test="delFlag != null  and delFlag != ''">del_flag = #{delFlag},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+        </trim>
+        where plan_id = #{planId}
+    </update>
+
+    <delete id="deleteTPensionPlanById" parameterType="Long">
+        delete from t_pension_plan where plan_id = #{planId}
+    </delete>
+
+    <delete id="deleteTPensionPlanByIds" parameterType="String">
+        delete from t_pension_plan where plan_id in 
+        <foreach item="planId" collection="array" open="(" separator="," close=")">
+            #{planId}
+        </foreach>
+    </delete>
+    
+</mapper>

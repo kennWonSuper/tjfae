@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.entrust.mapper.TEntrustUserMapper">
+
+    <resultMap type="TEntrustUser" id="TEntrustUserResult">
+        <result property="id"    column="id"    />
+        <result property="userName"    column="user_name"    />
+        <result property="planName"    column="plan_name"    />
+        <result property="name"    column="name"    />
+        <result property="gender"    column="gender"    />
+        <result property="nation"    column="nation"    />
+        <result property="cardType"    column="card_type"    />
+        <result property="cardNo"    column="card_no"    />
+        <result property="birthday"    column="birthday"    />
+        <result property="mobileNo"    column="mobile_no"    />
+        <result property="contactAddr"    column="contact_addr"    />
+        <result property="email"    column="email"    />
+        <result property="remarks"    column="remarks"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectTEntrustUserVo">
+        select id, user_name, plan_name, name, gender, nation, card_type, card_no, birthday, mobile_no, contact_addr, email, remarks, create_by, update_by, create_time, update_time from t_entrust_user
+    </sql>
+
+    <select id="selectTEntrustUserList" parameterType="TEntrustUser" resultMap="TEntrustUserResult">
+        <include refid="selectTEntrustUserVo"/>
+        <where>
+            <if test="userName != null  and userName != ''"> and user_name like concat('%', #{userName}, '%')</if>
+            <if test="planName != null  and planName != ''"> and plan_name like concat('%', #{planName}, '%')</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="gender != null  and gender != ''"> and gender = #{gender}</if>
+            <if test="nation != null  and nation != ''"> and nation = #{nation}</if>
+            <if test="cardType != null  and cardType != ''"> and card_type = #{cardType}</if>
+            <if test="cardNo != null  and cardNo != ''"> and card_no = #{cardNo}</if>
+            <if test="birthday != null  and birthday != ''"> and birthday = #{birthday}</if>
+            <if test="mobileNo != null  and mobileNo != ''"> and mobile_no = #{mobileNo}</if>
+            <if test="contactAddr != null  and contactAddr != ''"> and contact_addr = #{contactAddr}</if>
+            <if test="email != null  and email != ''"> and email = #{email}</if>
+            <if test="remarks != null  and remarks != ''"> and remarks = #{remarks}</if>
+        </where>
+    </select>
+
+    <select id="selectTEntrustUserById" parameterType="Long" resultMap="TEntrustUserResult">
+        <include refid="selectTEntrustUserVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertTEntrustUser" parameterType="TEntrustUser" useGeneratedKeys="true" keyProperty="id">
+        insert into t_entrust_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userName != null  and userName != ''">user_name,</if>
+            <if test="planName != null  and planName != ''">plan_name,</if>
+            <if test="name != null  and name != ''">name,</if>
+            <if test="gender != null  and gender != ''">gender,</if>
+            <if test="nation != null  and nation != ''">nation,</if>
+            <if test="cardType != null  and cardType != ''">card_type,</if>
+            <if test="cardNo != null  and cardNo != ''">card_no,</if>
+            <if test="birthday != null  and birthday != ''">birthday,</if>
+            <if test="mobileNo != null  and mobileNo != ''">mobile_no,</if>
+            <if test="contactAddr != null  and contactAddr != ''">contact_addr,</if>
+            <if test="email != null  and email != ''">email,</if>
+            <if test="remarks != null  and remarks != ''">remarks,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="updateBy != null  and updateBy != ''">update_by,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="updateTime != null ">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userName != null  and userName != ''">#{userName},</if>
+            <if test="planName != null  and planName != ''">#{planName},</if>
+            <if test="name != null  and name != ''">#{name},</if>
+            <if test="gender != null  and gender != ''">#{gender},</if>
+            <if test="nation != null  and nation != ''">#{nation},</if>
+            <if test="cardType != null  and cardType != ''">#{cardType},</if>
+            <if test="cardNo != null  and cardNo != ''">#{cardNo},</if>
+            <if test="birthday != null  and birthday != ''">#{birthday},</if>
+            <if test="mobileNo != null  and mobileNo != ''">#{mobileNo},</if>
+            <if test="contactAddr != null  and contactAddr != ''">#{contactAddr},</if>
+            <if test="email != null  and email != ''">#{email},</if>
+            <if test="remarks != null  and remarks != ''">#{remarks},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTEntrustUser" parameterType="TEntrustUser">
+        update t_entrust_user
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userName != null  and userName != ''">user_name = #{userName},</if>
+            <if test="planName != null  and planName != ''">plan_name = #{planName},</if>
+            <if test="name != null  and name != ''">name = #{name},</if>
+            <if test="gender != null  and gender != ''">gender = #{gender},</if>
+            <if test="nation != null  and nation != ''">nation = #{nation},</if>
+            <if test="cardType != null  and cardType != ''">card_type = #{cardType},</if>
+            <if test="cardNo != null  and cardNo != ''">card_no = #{cardNo},</if>
+            <if test="birthday != null  and birthday != ''">birthday = #{birthday},</if>
+            <if test="mobileNo != null  and mobileNo != ''">mobile_no = #{mobileNo},</if>
+            <if test="contactAddr != null  and contactAddr != ''">contact_addr = #{contactAddr},</if>
+            <if test="email != null  and email != ''">email = #{email},</if>
+            <if test="remarks != null  and remarks != ''">remarks = #{remarks},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTEntrustUserById" parameterType="Long">
+        delete from t_entrust_user where id = #{id}
+    </delete>
+
+    <delete id="deleteTEntrustUserByIds" parameterType="String">
+        delete from t_entrust_user where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>
